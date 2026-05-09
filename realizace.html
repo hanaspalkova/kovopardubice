@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realizace | Kovovýroba Jiří Vyskočil</title>
+    <meta name="description"
+        content="Prohlédněte si naše realizované projekty. Každá zakázka je jiná – jiný pozemek, jiné přání, jiné technické podmínky.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.svg?v=3" type="image/svg+xml">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="/" class="logo-link">
+                <svg class="logo-svg" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                    <g stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+                        <line x1="8" y1="6" x2="8" y2="26" class="logo-white" />
+                        <line x1="22" y1="6" x2="12" y2="16" class="logo-orange" />
+                        <line x1="16" y1="20" x2="22" y2="26" class="logo-white" />
+                    </g>
+                </svg>
+                <span class="logo-text">Kovo<span class="logo-highlight">pardubice</span></span>
+            </a>
+
+            <button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="main-nav">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <nav class="main-nav" id="main-nav">
+                <ul class="nav-list">
+                    <li><a href="/">DOMŮ</a></li>
+                    <li><a href="/sluzby">SLUŽBY A PRODUKTY</a></li>
+                    <li><a href="/realizace" class="active">REALIZACE</a></li>
+                    <li><a href="/o-mne">O MNĚ</a></li>
+                    <li><a href="/caste-dotazy">ČASTÉ DOTAZY</a></li>
+                </ul>
+                <a href="/kontakt" class="btn btn-primary mobile-nav-btn">KONTAKT</a>
+            </nav>
+
+            <a href="/kontakt" class="btn btn-primary header-btn">KONTAKT</a>
+        </div>
+    </header>
+
+    <!-- Page Header (Sub-Hero) -->
+    <header class="page-header bg-dark section-slant-bottom" style="z-index: 4;">
+        <div class="container reveal-up">
+            <span class="section-subtitle">PORTFOLIO</span>
+            <h1 class="page-title">REALIZACE</h1>
+            <p class="page-desc">Každá zakázka je jiná – jiný pozemek, jiné přání, jiné technické podmínky.<br>
+                Tady si můžete prohlédnout, co vzniklo v naší dílně a bylo osazeno přímo u zákazníka.</p>
+            <p class="page-desc" style="font-size: 0.9em; opacity: 0.8; margin-top: 1.5rem;">Portfolio průběžně doplňujeme o nové projekty.</p>
+        </div>
+    </header>
+
+    <!-- Portfolio Grid Section -->
+    <section class="portfolio-section bg-light section-slant-bottom" style="z-index: 3;">
+        <div class="container">
+            <div class="portfolio-grid">
+                <!-- Project 1 -->
+                <div class="portfolio-card reveal-up">
+                    <div class="portfolio-image">
+                        <img src="Images/Realizace/posuvna-brana.jpg" alt="Posuvná brána - rodinný dům, Pardubice">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Posuvná brána - rodinný dům, Pardubice</h3>
+                        <p class="portfolio-desc">Zakázková posuvná brána z ocelových profilů s povrchovou úpravou. Osazena na pozemku rodinného domu.</p>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="portfolio-card reveal-up" style="transition-delay: 0.1s;">
+                    <div class="portfolio-image">
+                        <img src="Images/Realizace/schodiste.jpg" alt="Ocelové schodiště - interiér, Chrudim">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Ocelové schodiště - interiér, Chrudim</h3>
+                        <p class="portfolio-desc">Přímé ocelové schodiště s nerezovým zábradlím pro rodinný dům. Kombinace oceli a dřeva.</p>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="portfolio-card reveal-up" style="transition-delay: 0.2s;">
+                    <div class="portfolio-image">
+                        <img src="Images/ocelove_konstrukce.jpg" alt="Průmyslová hala - ocelová konstrukce, Semtín">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Průmyslová hala - ocelová konstrukce, Semtín</h3>
+                        <p class="portfolio-desc">Lehká ocelová hala pro skladové účely. Kompletní výroba a montáž nosné konstrukce.</p>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="portfolio-card reveal-up">
+                    <div class="portfolio-image">
+                        <img src="Images/Realizace/kovovy-plot.jpg" alt="Oplocení s vjezdovou bránou - Holice">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Oplocení s vjezdovou bránou - Holice</h3>
+                        <p class="portfolio-desc">Plotová pole a křídlová vjezdová brána z bezpečnostního plechu, žárově pozinkovaná.</p>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="portfolio-card reveal-up" style="transition-delay: 0.1s;">
+                    <div class="portfolio-image">
+                        <img src="Images/Realizace/klec-kocky.jpeg" alt="Výběh pro kočky - Pardubice">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Výběh pro kočky - Pardubice</h3>
+                        <p class="portfolio-desc">Bezpečná venkovní voliéra pro kočky. Pevná ocelová konstrukce s odolným pletivem, vyrobená přesně na míru.</p>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="portfolio-card reveal-up" style="transition-delay: 0.2s;">
+                    <div class="portfolio-image">
+                        <img src="Images/schodiste_a_zabradli.jpg" alt="Balkonové zábradlí - nerez, Hradec Králové">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Balkonové zábradlí - nerez, Hradec Králové</h3>
+                        <p class="portfolio-desc">Nerezové zábradlí na balkón bytového domu. Moderní design, výplň z nerezových tyčí.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section bg-white section-slant-bottom" style="z-index: 2;">
+        <div class="container">
+            <div class="section-header text-center reveal-up">
+                <h2 class="section-title">LÍBÍ SE VÁM NĚKTERÁ REALIZACE A CHCETE <span class="text-orange">NĚCO PODOBNÉHO?</span></h2>
+                <p class="section-desc mt-m">Napište mi – domluvíme se na zaměření a připravím nabídku na míru.</p>
+                <a href="/kontakt" class="btn btn-primary mt-l">POPTAT ŘEŠENÍ</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand reveal-up">
+                    <a href="/" class="logo-link">
+                        <svg class="logo-svg" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                            <g stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+                                <line x1="8" y1="6" x2="8" y2="26" class="logo-white" />
+                                <line x1="22" y1="6" x2="12" y2="16" class="logo-orange" />
+                                <line x1="16" y1="20" x2="22" y2="26" class="logo-white" />
+                            </g>
+                        </svg>
+                        <span class="logo-text text-white">Kovo<span class="logo-highlight">pardubice</span></span>
+                    </a>
+                    <p class="mt-s text-light">Spolehlivá práce s kovem.<br>Od prvního řezu po finální montáž.</p>
+                </div>
+
+                <div class="footer-contact reveal-up" style="transition-delay: 0.1s;">
+                    <h3 class="footer-title">KONTAKT</h3>
+                    <ul class="footer-list">
+                        <li><i class="fa-solid fa-phone text-orange"></i>&nbsp; <a
+                                href="tel:+420773185886">+420&nbsp;773&nbsp;185&nbsp;886</a></li>
+                        <li><i class="fa-solid fa-envelope text-orange"></i>&nbsp; <a
+                                href="mailto:kovopardubice@gmail.com">kovopardubice@gmail.com</a></li>
+                        <li><i class="fa-solid fa-location-dot text-orange"></i>&nbsp; <span>Kovovýroba Jiří
+                                Vyskočil<br>Semtín, Pardubice</span></li>
+                        <li class="mt-m text-smaller">IČO: 73667846 | Zapsán v živnostenském rejstříku</li>
+                    </ul>
+                </div>
+
+                <div class="footer-nav reveal-up" style="transition-delay: 0.2s;">
+                    <h3 class="footer-title">NAVIGACE</h3>
+                    <ul class="footer-list">
+                        <li><a href="/">Domů</a></li>
+                        <li><a href="/sluzby">Služby a produkty</a></li>
+                        <li><a href="/realizace">Realizace</a></li>
+                        <li><a href="/o-mne">O mně</a></li>
+                        <li><a href="/caste-dotazy">Časté dotazy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom reveal-up" style="transition-delay: 0.3s;">
+                <p>&copy; 2026 Kovovýroba Jiří Vyskočil. Všechna práva vyhrazena.</p>
+                <p>Web vytvořila <a href="https://www.linkedin.com/in/hanaspalkova" target="_blank" rel="noopener noreferrer">Hana Špálková</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
