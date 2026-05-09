@@ -525,7 +525,7 @@ body.menu-open .logo-link {
 
 .step-card {
     background: var(--color-white);
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-sm);
     border-top: 1px solid rgba(0,0,0,0.05);
@@ -533,8 +533,7 @@ body.menu-open .logo-link {
     transition: var(--transition);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    aspect-ratio: 1 / 1;
+    justify-content: flex-start;
 }
 
 .step-card:hover {
