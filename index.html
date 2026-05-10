@@ -51,13 +51,18 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Rajdhani:wght@700&display=swap" rel="stylesheet">
-    
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Rajdhani:wght@700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Rajdhani:wght@700&display=swap"></noscript>
+
     <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Preload LCP image -->
+    <link rel="preload" as="image" href="Images/foto-hero.webp" type="image/webp">
     
     <!-- Favicon -->
     <link rel="icon" href="favicon.svg?v=3" type="image/svg+xml">
@@ -102,7 +107,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-bg">
-            <img src="Images/foto-hero.jpg" alt="Svářeč při práci" class="hero-img" loading="eager">
+            <img src="Images/foto-hero.webp" alt="Svářeč při práci" class="hero-img" loading="eager" fetchpriority="high" width="1900" height="1266">
             <div class="hero-overlay"></div>
         </div>
         <div class="container hero-content">
