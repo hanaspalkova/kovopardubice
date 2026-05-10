@@ -1,6 +1,12 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { "source": "/poptavka", "destination": "/kontakt", "permanent": true }
+    { "source": "/poptavka", "destination": "/kontakt", "permanent": true },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "kovopardubice.vercel.app" }],
+      "destination": "https://kovopardubice.cz/$1",
+      "permanent": true
+    }
   ]
 }
