@@ -109,25 +109,68 @@ document.addEventListener('DOMContentLoaded', () => {
         countOnScroll.observe(el);
     });
 
-    // Hero sparkles
+    // Hero welding sparks (canvas particle system)
     const heroSection = document.querySelector('.hero');
     if (heroSection) {
-        const colors = ['#ffffff', '#fff4c2', '#ffd97d', '#ffb347', '#ff8c42'];
-        for (let i = 0; i < 35; i++) {
-            const el = document.createElement('div');
-            el.classList.add('hero-sparkle');
-            const size = Math.random() * 10 + 4;
-            el.style.cssText = [
-                `left:${Math.random() * 100}%`,
-                `top:${Math.random() * 100}%`,
-                `width:${size}px`,
-                `height:${size}px`,
-                `background:${colors[Math.floor(Math.random() * colors.length)]}`,
-                `--duration:${(Math.random() * 4 + 2).toFixed(1)}s`,
-                `--delay:${(Math.random() * 6).toFixed(1)}s`,
-            ].join(';');
-            heroSection.appendChild(el);
+        const canvas = document.createElement('canvas');
+        canvas.classList.add('hero-sparks');
+        heroSection.appendChild(canvas);
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = heroSection.offsetWidth;
+            canvas.height = heroSection.offsetHeight;
         }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const sparkColors = ['#ffffff', '#fff5b0', '#ffcc44', '#ff9900', '#ff6600'];
+        let particles = [];
+
+        function spawnParticle() {
+            // Origin: bottom-centre-right where the welder/sparks are in the photo
+            const ox = canvas.width * (0.45 + Math.random() * 0.25);
+            const oy = canvas.height * (0.65 + Math.random() * 0.2);
+            const angle = -Math.PI / 2 + (Math.random() - 0.5) * 1.4; // mostly upward
+            const speed = Math.random() * 2.5 + 0.8;
+            particles.push({
+                x: ox, y: oy,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
+                size: Math.random() * 1.8 + 0.4,
+                color: sparkColors[Math.floor(Math.random() * sparkColors.length)],
+                life: 0,
+                maxLife: Math.random() * 70 + 35,
+            });
+        }
+
+        function animateSparks() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (Math.random() < 0.35) spawnParticle();
+
+            particles = particles.filter(p => p.life < p.maxLife);
+            particles.forEach(p => {
+                p.life++;
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.03;                        // gentle gravity arc
+                p.vx += (Math.random() - 0.5) * 0.08; // slight flicker
+                const alpha = 1 - p.life / p.maxLife;
+                ctx.save();
+                ctx.globalAlpha = alpha;
+                ctx.shadowBlur = 5;
+                ctx.shadowColor = p.color;
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            });
+
+            requestAnimationFrame(animateSparks);
+        }
+        animateSparks();
     }
 
     // FAQ Accordion
