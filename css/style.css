@@ -488,6 +488,17 @@ body.menu-open .logo-link {
     gap: 1rem;
 }
 
+@media (max-width: 576px) {
+    .hero-buttons {
+        flex-wrap: nowrap;
+        gap: 0.625rem;
+    }
+    .hero-buttons .btn {
+        padding: 0.625rem 1rem;
+        font-size: 0.8rem;
+    }
+}
+
 /* Section Header */
 .section-header {
     margin-bottom: 4rem;
