@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 p.life++;
                 p.x += p.vx;
                 p.y += p.vy;
-                p.vy += 0.03;                        // gentle gravity arc
+                p.vy -= 0.01;                        // mírné zrychlení nahoru
                 p.vx += (Math.random() - 0.5) * 0.08; // slight flicker
                 const alpha = 1 - p.life / p.maxLife;
                 ctx.save();
