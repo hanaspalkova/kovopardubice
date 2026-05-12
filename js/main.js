@@ -109,9 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
         countOnScroll.observe(el);
     });
 
-    // Hero welding sparks (canvas particle system)
+    // Hero welding sparks (canvas particle system) — desktop only
     const heroSection = document.querySelector('.hero');
-    if (heroSection) {
+    if (heroSection && window.innerWidth >= 768) {
         const canvas = document.createElement('canvas');
         canvas.classList.add('hero-sparks');
         heroSection.appendChild(canvas);
@@ -128,11 +128,11 @@ document.addEventListener('DOMContentLoaded', () => {
         let particles = [];
 
         function spawnParticle() {
-            // Origin: bottom-centre-right where the welder/sparks are in the photo
-            const ox = canvas.width * (0.45 + Math.random() * 0.25);
+            // Origin: bottom-right where the welder/sparks are in the photo
+            const ox = canvas.width * (0.65 + Math.random() * 0.2);
             const oy = canvas.height * (0.65 + Math.random() * 0.2);
-            const angle = -Math.PI / 2 + (Math.random() - 0.5) * 1.4; // mostly upward
-            const speed = Math.random() * 2.5 + 0.8;
+            const angle = -Math.PI / 2 + (Math.random() - 0.5) * 0.7; // more upward
+            const speed = Math.random() * 1.2 + 0.4;
             particles.push({
                 x: ox, y: oy,
                 vx: Math.cos(angle) * speed,
