@@ -489,6 +489,10 @@ body.menu-open .logo-link {
 }
 
 @media (max-width: 576px) {
+    .hero {
+        align-items: flex-start;
+        padding-top: 120px;
+    }
     .hero-buttons {
         flex-wrap: nowrap;
         gap: 0.625rem;
