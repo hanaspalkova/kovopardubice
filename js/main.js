@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function spawnParticle() {
             // Origin: bottom-right where the welder/sparks are in the photo
-            const ox = canvas.width * (0.65 + Math.random() * 0.2);
+            const ox = canvas.width * (0.67 + Math.random() * 0.1);
             const oy = canvas.height * (0.65 + Math.random() * 0.2);
             const angle = -Math.PI / 2 + (Math.random() - 0.5) * 0.7; // more upward
             const speed = Math.random() * 1.2 + 0.4;
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function animateSparks() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            if (Math.random() < 0.35) spawnParticle();
+            if (Math.random() < 0.15) spawnParticle();
 
             particles = particles.filter(p => p.life < p.maxLife);
             particles.forEach(p => {
