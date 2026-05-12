@@ -406,19 +406,26 @@ body.menu-open .logo-link {
     width: 100%;
     height: 100%;
     z-index: -1;
-    overflow: hidden;
+    background-image: url('../Images/foto-hero.webp');
+    background-size: cover;
+    background-position: center;
 }
 
-.hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    animation: zoomInOut 25s infinite alternate linear;
+/* Sparkles */
+.hero-sparkle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    clip-path: polygon(50% 0%, 56% 44%, 100% 50%, 56% 56%, 50% 100%, 44% 56%, 0% 50%, 44% 44%);
+    animation: sparkleFade var(--duration, 3s) var(--delay, 0s) infinite ease-in-out;
+    opacity: 0;
 }
 
-@keyframes zoomInOut {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.15); }
+@keyframes sparkleFade {
+    0%   { opacity: 0;   transform: scale(0.3) rotate(0deg); }
+    35%  { opacity: 1;   transform: scale(1)   rotate(45deg); }
+    65%  { opacity: 0.7; transform: scale(0.8) rotate(80deg); }
+    100% { opacity: 0;   transform: scale(0.2) rotate(120deg); }
 }
 
 .hero-overlay {

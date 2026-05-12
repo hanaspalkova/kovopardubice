@@ -109,6 +109,27 @@ document.addEventListener('DOMContentLoaded', () => {
         countOnScroll.observe(el);
     });
 
+    // Hero sparkles
+    const heroSection = document.querySelector('.hero');
+    if (heroSection) {
+        const colors = ['#ffffff', '#fff4c2', '#ffd97d', '#ffb347', '#ff8c42'];
+        for (let i = 0; i < 35; i++) {
+            const el = document.createElement('div');
+            el.classList.add('hero-sparkle');
+            const size = Math.random() * 10 + 4;
+            el.style.cssText = [
+                `left:${Math.random() * 100}%`,
+                `top:${Math.random() * 100}%`,
+                `width:${size}px`,
+                `height:${size}px`,
+                `background:${colors[Math.floor(Math.random() * colors.length)]}`,
+                `--duration:${(Math.random() * 4 + 2).toFixed(1)}s`,
+                `--delay:${(Math.random() * 6).toFixed(1)}s`,
+            ].join(';');
+            heroSection.appendChild(el);
+        }
+    }
+
     // FAQ Accordion
     const faqItems = document.querySelectorAll('.faq-item');
     if (faqItems.length > 0) {
