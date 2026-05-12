@@ -442,6 +442,7 @@ body.menu-open .logo-link {
     align-items: center;
     gap: 1rem;
     font-family: var(--font-heading);
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
     font-weight: 700;
     letter-spacing: 0.1em;
     color: var(--color-orange); /* Změněno na oranžovou */
@@ -455,6 +456,7 @@ body.menu-open .logo-link {
 }
 
 .hero-title {
+    font-size: clamp(2.5rem, 5vw + 1rem, 5rem);
     margin-bottom: 2.5rem;
     text-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
@@ -472,7 +474,10 @@ body.menu-open .logo-link {
 }
 
 .hero-subtext {
+    font-family: var(--font-text);
     font-size: clamp(1rem, 1.2vw, 1.125rem);
+    font-weight: 400;
+    text-transform: none;
     color: var(--color-muted-light);
     line-height: 1.6;
 }
