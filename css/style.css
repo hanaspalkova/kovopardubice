@@ -491,7 +491,7 @@ body.menu-open .logo-link {
 @media (max-width: 576px) {
     .hero {
         align-items: flex-start;
-        padding-top: 120px;
+        padding-top: 150px;
     }
     .hero-buttons {
         flex-wrap: nowrap;
