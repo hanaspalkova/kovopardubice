@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
 Sitemap: https://kovopardubice.cz/sitemap.xml
