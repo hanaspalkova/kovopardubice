@@ -11,10 +11,17 @@
         if (placeholder) placeholder.style.display = 'none';
     }
 
+    function grantAnalytics() {
+        if (typeof gtag === 'function') {
+            gtag('consent', 'update', { analytics_storage: 'granted' });
+        }
+    }
+
     function acceptAll() {
         localStorage.setItem(STORAGE_KEY, 'all');
         hideBanner();
         loadGoogleMaps();
+        grantAnalytics();
     }
 
     function acceptNecessary() {
@@ -34,6 +41,7 @@
         const consent = localStorage.getItem(STORAGE_KEY);
         if (consent === 'all') {
             loadGoogleMaps();
+            grantAnalytics();
             return;
         }
 
