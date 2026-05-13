@@ -27,7 +27,7 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
+      "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
       "name": "Jiří Vyskočil – Kovovýroba",
       "url": "https://kovopardubice.cz",
       "logo": "https://kovopardubice.cz/logo.svg",
@@ -41,16 +41,27 @@
         "addressLocality": "Pardubice",
         "addressCountry": "CZ"
       },
-      "areaServed": {
-        "@type": "GeoCircle",
-        "geoMidpoint": {
-          "@type": "GeoCoordinates",
-          "latitude": 50.0343,
-          "longitude": 15.7812
-        },
-        "geoRadius": "50000"
-      },
+      "areaServed": [
+        { "@type": "State", "name": "Pardubický kraj" },
+        { "@type": "State", "name": "Královéhradecký kraj" }
+      ],
       "priceRange": "$$",
+      "founder": {
+        "@type": "Person",
+        "name": "Jiří Vyskočil"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Kovovýroba a zámečnické práce",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Brány a oplocení" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Schodiště a zábradlí" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Vrata a mříže" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Přístřešky a pergoly" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ocelové konstrukce" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Svařování" } }
+        ]
+      },
       "knowsAbout": ["kovovýroba", "brány", "ploty", "ocelové konstrukce", "schodiště", "zábradlí", "zámečnictví"]
     }
     </script>
