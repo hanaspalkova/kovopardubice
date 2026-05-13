@@ -1516,3 +1516,134 @@ body.menu-open .logo-link {
     margin-bottom: 0;
 }
 
+/* Cookie Banner */
+.cookie-banner {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 9999;
+    width: 320px;
+    background: var(--color-dark);
+    color: var(--color-white);
+    border-radius: 6px;
+    padding: 1.25rem 1.25rem 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    transform: translateY(12px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.cookie-banner.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.cookie-banner__text {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--color-muted-light);
+    margin-bottom: 1rem;
+}
+
+.cookie-banner__link {
+    color: var(--color-orange);
+    text-decoration: underline;
+    white-space: nowrap;
+}
+
+.cookie-banner__link:hover {
+    color: #ff8c3a;
+}
+
+.cookie-banner__actions {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.cookie-banner__btn {
+    flex: 1;
+    padding: 0.5rem 0.6rem;
+    font-size: 0.78rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border-radius: var(--border-radius);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: var(--transition);
+    text-transform: uppercase;
+}
+
+.cookie-banner__btn--primary {
+    background: var(--color-orange);
+    color: var(--color-white);
+    border-color: var(--color-orange);
+}
+
+.cookie-banner__btn--primary:hover {
+    background: #e55e00;
+    border-color: #e55e00;
+}
+
+.cookie-banner__btn--secondary {
+    background: transparent;
+    color: var(--color-muted-light);
+    border-color: #555;
+}
+
+.cookie-banner__btn--secondary:hover {
+    border-color: var(--color-muted-light);
+    color: var(--color-white);
+}
+
+@media (max-width: 400px) {
+    .cookie-banner {
+        right: 1rem;
+        left: 1rem;
+        width: auto;
+        bottom: 1rem;
+    }
+}
+
+/* Map placeholder (before cookie consent) */
+.map-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background: #e8e3db;
+    text-align: center;
+    padding: 2rem;
+}
+
+.map-placeholder__text {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    max-width: 240px;
+    line-height: 1.5;
+}
+
+.map-placeholder__btn {
+    padding: 0.5rem 1.2rem;
+    background: var(--color-orange);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--border-radius);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.map-placeholder__btn:hover {
+    background: #e55e00;
+}
+

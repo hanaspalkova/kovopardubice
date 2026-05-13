@@ -224,6 +224,7 @@
                         <li><a href="/realizace">Realizace</a></li>
                         <li><a href="/o-mne">O mně</a></li>
                         <li><a href="/caste-dotazy">Časté dotazy</a></li>
+                        <li><a href="/zasady-cookies">Zásady cookies</a></li>
                     </ul>
                 </div>
             </div>
@@ -235,8 +236,21 @@
         </div>
     </footer>
 
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Souhlas s cookies">
+        <p class="cookie-banner__text">
+            Používáme cookies pro správné fungování webu. Google Mapy načítají soubory třetích stran (Google LLC).
+            <a href="/zasady-cookies" class="cookie-banner__link">Zásady cookies</a>
+        </p>
+        <div class="cookie-banner__actions">
+            <button id="cookie-accept-all" class="cookie-banner__btn cookie-banner__btn--primary">Přijmout vše</button>
+            <button id="cookie-accept-necessary" class="cookie-banner__btn cookie-banner__btn--secondary">Pouze nezbytné</button>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="js/main.js"></script>
+    <script src="js/cookie-consent.js"></script>
 </body>
 
 </html>

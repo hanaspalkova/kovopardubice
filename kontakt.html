@@ -146,7 +146,11 @@
 
                     <h3 class="map-title">Kde nás najdete</h3>
                     <div class="map-container">
-                        <iframe src="https://maps.google.com/maps?q=50.058780,15.729581&hl=cs&z=15&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <div id="map-placeholder" class="map-placeholder">
+                            <p class="map-placeholder__text">Pro zobrazení mapy je nutný souhlas s cookies třetích stran (Google Maps).</p>
+                            <button id="map-consent-btn" class="map-placeholder__btn">Přijmout a zobrazit mapu</button>
+                        </div>
+                        <iframe id="google-map" data-src="https://maps.google.com/maps?q=50.058780,15.729581&hl=cs&z=15&output=embed" width="100%" height="100%" style="border:0;display:none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
 
@@ -229,6 +233,7 @@
                         <li><a href="/realizace">Realizace</a></li>
                         <li><a href="/o-mne">O mně</a></li>
                         <li><a href="/caste-dotazy">Časté dotazy</a></li>
+                        <li><a href="/zasady-cookies">Zásady cookies</a></li>
                     </ul>
                 </div>
             </div>
@@ -239,6 +244,18 @@
             </div>
         </div>
     </footer>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Souhlas s cookies">
+        <p class="cookie-banner__text">
+            Používáme cookies pro správné fungování webu. Google Mapy načítají soubory třetích stran (Google LLC).
+            <a href="/zasady-cookies" class="cookie-banner__link">Zásady cookies</a>
+        </p>
+        <div class="cookie-banner__actions">
+            <button id="cookie-accept-all" class="cookie-banner__btn cookie-banner__btn--primary">Přijmout vše</button>
+            <button id="cookie-accept-necessary" class="cookie-banner__btn cookie-banner__btn--secondary">Pouze nezbytné</button>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="js/main.js"></script>
