@@ -1196,6 +1196,10 @@ body.menu-open .logo-link {
 }
 
 @media screen and (max-width: 768px) {
+    .logo-text {
+        display: none;
+    }
+
     .timeline::after {
         left: 22px;
     }
