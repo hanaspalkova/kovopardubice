@@ -206,28 +206,10 @@ section {
     gap: 0.5rem;
 }
 
-.logo-svg {
-    width: 32px;
-    height: 32px;
-}
-
-.logo-white { stroke: var(--color-white); transition: var(--transition); }
-.logo-orange { stroke: var(--color-orange); transition: var(--transition); }
-
-.header.scrolled .logo-white { stroke: var(--color-white); }
-
-.logo-link:hover .logo-white { stroke: var(--color-orange); }
-.logo-link:hover .logo-orange { stroke: var(--color-white); }
-
-.logo-text {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-off-white);
-}
-
-.logo-highlight {
-    color: var(--color-orange);
+.logo-img {
+    height: 40px;
+    width: auto;
+    display: block;
 }
 
 .main-nav {
