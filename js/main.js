@@ -207,11 +207,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (todayCard) {
         const canvas = document.createElement('canvas');
         canvas.style.position = 'absolute';
-        const padding = 200; 
-        canvas.style.top = `-${padding}px`;
-        canvas.style.left = `-${padding}px`;
-        canvas.style.width = `calc(100% + ${padding * 2}px)`;
-        canvas.style.height = `calc(100% + ${padding * 2}px)`;
+        
+        // Rozlišujeme horizontální a vertikální padding.
+        // Na mobilu je horizontální padding minimální (10px), což absolutně zabrání přetečení obrazovky (overflow-x) a zobrazení bílého pruhu.
+        const isMobile = window.innerWidth < 768;
+        const paddingX = isMobile ? 10 : 200; 
+        const paddingY = isMobile ? 150 : 200; 
+        
+        canvas.style.top = `-${paddingY}px`;
+        canvas.style.left = `-${paddingX}px`;
+        canvas.style.width = `calc(100% + ${paddingX * 2}px)`;
+        canvas.style.height = `calc(100% + ${paddingY * 2}px)`;
         canvas.style.pointerEvents = 'none';
         canvas.style.zIndex = '10';
         todayCard.style.position = 'relative';
@@ -223,8 +229,17 @@ document.addEventListener('DOMContentLoaded', () => {
         let isHovered = false;
 
         function resizeCanvas() {
-            canvas.width = todayCard.offsetWidth + padding * 2;
-            canvas.height = todayCard.offsetHeight + padding * 2;
+            const currentIsMobile = window.innerWidth < 768;
+            const currentPaddingX = currentIsMobile ? 10 : 200;
+            const currentPaddingY = currentIsMobile ? 150 : 200;
+            
+            canvas.style.top = `-${currentPaddingY}px`;
+            canvas.style.left = `-${currentPaddingX}px`;
+            canvas.style.width = `calc(100% + ${currentPaddingX * 2}px)`;
+            canvas.style.height = `calc(100% + ${currentPaddingY * 2}px)`;
+            
+            canvas.width = todayCard.offsetWidth + currentPaddingX * 2;
+            canvas.height = todayCard.offsetHeight + currentPaddingY * 2;
         }
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
@@ -244,13 +259,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.y = y;
                 this.type = Math.random() > 0.4 ? 'spark' : 'confetti';
                 
+                const currentIsMobile = window.innerWidth < 768;
                 const angle = Math.random() * Math.PI * 2;
-                const speed = isExplosion 
+                
+                let speed = isExplosion 
                     ? (Math.random() * 6 + 2) 
                     : (Math.random() * 3 + 1);
+                
+                if (currentIsMobile) {
+                    // Na mobilu částice trochu zpomalíme, aby se držely blízko středu
+                    speed *= 0.65;
+                }
                     
                 this.vx = Math.cos(angle) * speed;
                 this.vy = Math.sin(angle) * speed - (isExplosion ? 2 : 1);
+                
+                if (currentIsMobile) {
+                    // Na mobilu omezíme vodorovný pohyb na minimum, aby se částice neořezávaly o okraj plátna,
+                    // a nasměrujeme je více nahoru/dolů jako slavnostní fontánu.
+                    this.vx *= 0.4;
+                    this.vy = Math.sin(angle) * speed * 1.2 - (isExplosion ? 2.5 : 1.2);
+                }
                 
                 this.size = Math.random() * 3 + 1.5;
                 this.color = colors[Math.floor(Math.random() * colors.length)];
@@ -297,7 +326,13 @@ document.addEventListener('DOMContentLoaded', () => {
         function triggerExplosion() {
             const centerX = canvas.width / 2;
             const centerY = canvas.height / 2;
-            const count = Math.floor(Math.random() * 20) + 60; // 60-80 particles
+            const currentIsMobile = window.innerWidth < 768;
+            
+            // Méně částic na mobilu pro plynulost a eliminaci chaosu
+            const count = currentIsMobile 
+                ? (Math.floor(Math.random() * 15) + 30) // 30-45 částic na mobilu
+                : (Math.floor(Math.random() * 20) + 60); // 60-80 částic na desktopu
+                
             for (let i = 0; i < count; i++) {
                 particles.push(new Particle(centerX, centerY, true));
             }
