@@ -201,4 +201,153 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // Sparks & Confetti explosion on the last timeline item (Dnes)
+    const todayCard = document.querySelector('.timeline-content.highlight');
+    if (todayCard) {
+        const canvas = document.createElement('canvas');
+        canvas.style.position = 'absolute';
+        const padding = 200; 
+        canvas.style.top = `-${padding}px`;
+        canvas.style.left = `-${padding}px`;
+        canvas.style.width = `calc(100% + ${padding * 2}px)`;
+        canvas.style.height = `calc(100% + ${padding * 2}px)`;
+        canvas.style.pointerEvents = 'none';
+        canvas.style.zIndex = '10';
+        todayCard.style.position = 'relative';
+        todayCard.appendChild(canvas);
+
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let animationFrameId = null;
+        let isHovered = false;
+
+        function resizeCanvas() {
+            canvas.width = todayCard.offsetWidth + padding * 2;
+            canvas.height = todayCard.offsetHeight + padding * 2;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const colors = [
+            '#FF6900', // brand orange
+            '#FF8533', // lighter orange
+            '#FFB380', // soft orange
+            '#ffffff', // white hot spark
+            '#FFD700', // gold
+            '#FFA500'  // orange
+        ];
+
+        class Particle {
+            constructor(x, y, isExplosion = false) {
+                this.x = x;
+                this.y = y;
+                this.type = Math.random() > 0.4 ? 'spark' : 'confetti';
+                
+                const angle = Math.random() * Math.PI * 2;
+                const speed = isExplosion 
+                    ? (Math.random() * 6 + 2) 
+                    : (Math.random() * 3 + 1);
+                    
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed - (isExplosion ? 2 : 1);
+                
+                this.size = Math.random() * 3 + 1.5;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.life = 0;
+                this.maxLife = Math.random() * 50 + 40;
+                
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.2;
+                this.width = Math.random() * 7 + 4;
+                this.height = Math.random() * 5 + 2;
+            }
+
+            update() {
+                this.life++;
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vx *= 0.95;
+                this.vy *= 0.95;
+                this.vy += 0.12; // gravity
+                this.rotation += this.rotationSpeed;
+            }
+
+            draw() {
+                const alpha = 1 - this.life / this.maxLife;
+                ctx.save();
+                ctx.globalAlpha = alpha;
+                ctx.fillStyle = this.color;
+                
+                if (this.type === 'spark') {
+                    ctx.shadowBlur = 6;
+                    ctx.shadowColor = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.translate(this.x, this.y);
+                    ctx.rotate(this.rotation);
+                    ctx.fillRect(-this.width / 2, -this.height / 2, this.width, this.height);
+                }
+                ctx.restore();
+            }
+        }
+
+        function triggerExplosion() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const count = Math.floor(Math.random() * 20) + 60; // 60-80 particles
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle(centerX, centerY, true));
+            }
+            startAnimation();
+        }
+
+        function spawnContinuous() {
+            if (isHovered && Math.random() < 0.25) {
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                particles.push(new Particle(centerX, centerY, false));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            spawnContinuous();
+
+            particles = particles.filter(p => p.life < p.maxLife);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            if (particles.length > 0 || isHovered) {
+                animationFrameId = requestAnimationFrame(animate);
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                animationFrameId = null;
+            }
+        }
+
+        function startAnimation() {
+            if (!animationFrameId) {
+                animate();
+            }
+        }
+
+        todayCard.addEventListener('mouseenter', () => {
+            isHovered = true;
+            triggerExplosion();
+        });
+
+        todayCard.addEventListener('mouseleave', () => {
+            isHovered = false;
+        });
+
+        todayCard.addEventListener('touchstart', () => {
+            triggerExplosion();
+        }, { passive: true });
+    }
 });
