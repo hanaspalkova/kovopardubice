@@ -202,12 +202,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Sparks & Confetti explosion on the last timeline item (Dnes)
+    // Sparks & Confetti explosion on the last timeline item (Dnes) - desktop only (width >= 768px)
     const todayCard = document.querySelector('.timeline-content.highlight');
-    if (todayCard) {
+    if (todayCard && window.innerWidth >= 768) {
         const canvas = document.createElement('canvas');
         canvas.style.position = 'absolute';
-        const padding = 450; 
+        const padding = 240; 
         canvas.style.top = `-${padding}px`;
         canvas.style.left = `-${padding}px`;
         canvas.style.width = `calc(100% + ${padding * 2}px)`;
@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.y = y;
                 this.type = Math.random() > 0.4 ? 'spark' : 'confetti';
                 
-                // Usměrnění úhlu výrazně více do stran (vlevo/vpravo) pro široký rozptyl
+                // Usměrnění úhlu více do stran (vlevo/vpravo) pro elegantní rozptyl
                 let angle;
                 if (Math.random() > 0.5) {
                     // Do pravé strany: -50° až +50°
@@ -255,35 +255,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 
                 const speed = isExplosion 
-                    ? (Math.random() * 11 + 4) // Vyšší rychlost pro dynamičtější explozi
-                    : (Math.random() * 4 + 1.5);
+                    ? (Math.random() * 5 + 2) // Vyvážená rychlost exploze
+                    : (Math.random() * 2.5 + 1);
                     
-                // Výrazné horizontální roztažení a mírný počáteční impulz nahoru
-                this.vx = Math.cos(angle) * speed * 2.4;
-                this.vy = Math.sin(angle) * speed * 0.7 - (isExplosion ? 2.5 : 0.8);
+                // Vyladěné horizontální roztažení a mírný počáteční impulz nahoru
+                this.vx = Math.cos(angle) * speed * 1.65;
+                this.vy = Math.sin(angle) * speed * 0.7 - (isExplosion ? 1.8 : 0.6);
                 
-                this.size = Math.random() * 3 + 1.5;
+                this.size = Math.random() * 2.5 + 1.2;
                 this.color = colors[Math.floor(Math.random() * colors.length)];
                 this.life = 0;
-                // Delší životnost částic, aby mohly doletět dál do široka
                 this.maxLife = isExplosion
-                    ? (Math.random() * 60 + 70) // 70 až 130 snímků
-                    : (Math.random() * 40 + 40); // 40 až 80 snímků
+                    ? (Math.random() * 50 + 40) // Vyvážená životnost částic
+                    : (Math.random() * 30 + 30);
                 
                 this.rotation = Math.random() * Math.PI * 2;
-                this.rotationSpeed = (Math.random() - 0.5) * 0.25;
-                this.width = Math.random() * 8 + 4;
-                this.height = Math.random() * 5 + 2;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.2;
+                this.width = Math.random() * 6 + 3;
+                this.height = Math.random() * 4 + 1.5;
             }
 
             update() {
                 this.life++;
                 this.x += this.vx;
                 this.y += this.vy;
-                // Velmi nízké tření horizontálně pro maximální dolet do široka
-                this.vx *= 0.982;
-                this.vy *= 0.975;
-                this.vy += 0.09; // Jemná gravitace pro lehký a elegantní pád
+                // Vyvážené tření pro plynulé zpomalování a elegantní pád
+                this.vx *= 0.976;
+                this.vy *= 0.968;
+                this.vy += 0.11; // Gravitace
                 this.rotation += this.rotationSpeed;
             }
 
@@ -294,7 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.fillStyle = this.color;
                 
                 if (this.type === 'spark') {
-                    ctx.shadowBlur = 6;
+                    ctx.shadowBlur = 5;
                     ctx.shadowColor = this.color;
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -311,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function triggerExplosion() {
             const centerX = canvas.width / 2;
             const centerY = canvas.height / 2;
-            const count = Math.floor(Math.random() * 30) + 80; // 80-110 particles
+            const count = Math.floor(Math.random() * 15) + 35; // 35-50 particles
             for (let i = 0; i < count; i++) {
                 particles.push(new Particle(centerX, centerY, true));
             }
@@ -319,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function spawnContinuous() {
-            if (isHovered && Math.random() < 0.25) {
+            if (isHovered && Math.random() < 0.2) {
                 const centerX = canvas.width / 2;
                 const centerY = canvas.height / 2;
                 particles.push(new Particle(centerX, centerY, false));
@@ -359,9 +358,5 @@ document.addEventListener('DOMContentLoaded', () => {
         todayCard.addEventListener('mouseleave', () => {
             isHovered = false;
         });
-
-        todayCard.addEventListener('touchstart', () => {
-            triggerExplosion();
-        }, { passive: true });
     }
 });
