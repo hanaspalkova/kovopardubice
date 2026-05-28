@@ -14,7 +14,7 @@
     --font-text: 'Inter', sans-serif;
     
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    --border-radius: 3px;
+    --border-radius: 0px;
     --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
     --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
@@ -157,7 +157,6 @@ section {
     border-color: var(--color-orange);
     color: var(--color-white);
     transform: scale(1.05);
-    box-shadow: 0 8px 25px rgba(255, 105, 0, 0.4);
 }
 
 /* Kovový odlesk (sheen effect) */
@@ -653,7 +652,7 @@ body.menu-open .logo-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 3px;
+    border-radius: var(--border-radius);
     flex-shrink: 0;
 }
 
@@ -834,7 +833,7 @@ body.menu-open .logo-link {
     display: flex;
     flex-direction: column;
     background: var(--color-white);
-    border-radius: 3px;
+    border-radius: var(--border-radius);
     overflow: hidden;
     margin-bottom: 4rem;
     box-shadow: 0 15px 40px rgba(0,0,0,0.04);
@@ -922,7 +921,7 @@ body.menu-open .logo-link {
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-left: 4px solid var(--color-orange);
     padding: 2.5rem;
-    border-radius: 3px;
+    border-radius: var(--border-radius);
     margin-top: 3rem;
     display: flex;
     flex-direction: column;
@@ -971,7 +970,7 @@ body.menu-open .logo-link {
 
 .portfolio-card {
     background: var(--color-white);
-    border-radius: 3px;
+    border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
@@ -1507,7 +1506,7 @@ body.menu-open .logo-link {
     width: 100%;
     padding: 1rem 1.25rem;
     border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 3px;
+    border-radius: var(--border-radius);
     font-family: var(--font-text);
     font-size: 1rem;
     background-color: var(--color-white);
