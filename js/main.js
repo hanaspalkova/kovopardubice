@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (todayCard) {
         const canvas = document.createElement('canvas');
         canvas.style.position = 'absolute';
-        const padding = 200; 
+        const padding = 450; 
         canvas.style.top = `-${padding}px`;
         canvas.style.left = `-${padding}px`;
         canvas.style.width = `calc(100% + ${padding * 2}px)`;
@@ -244,22 +244,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.y = y;
                 this.type = Math.random() > 0.4 ? 'spark' : 'confetti';
                 
-                const angle = Math.random() * Math.PI * 2;
+                // Usměrnění úhlu výrazně více do stran (vlevo/vpravo) pro široký rozptyl
+                let angle;
+                if (Math.random() > 0.5) {
+                    // Do pravé strany: -50° až +50°
+                    angle = (Math.random() - 0.5) * (Math.PI * 100 / 180);
+                } else {
+                    // Do levé strany: 130° až 230°
+                    angle = Math.PI + (Math.random() - 0.5) * (Math.PI * 100 / 180);
+                }
+                
                 const speed = isExplosion 
-                    ? (Math.random() * 6 + 2) 
-                    : (Math.random() * 3 + 1);
+                    ? (Math.random() * 11 + 4) // Vyšší rychlost pro dynamičtější explozi
+                    : (Math.random() * 4 + 1.5);
                     
-                this.vx = Math.cos(angle) * speed;
-                this.vy = Math.sin(angle) * speed - (isExplosion ? 2 : 1);
+                // Výrazné horizontální roztažení a mírný počáteční impulz nahoru
+                this.vx = Math.cos(angle) * speed * 2.4;
+                this.vy = Math.sin(angle) * speed * 0.7 - (isExplosion ? 2.5 : 0.8);
                 
                 this.size = Math.random() * 3 + 1.5;
                 this.color = colors[Math.floor(Math.random() * colors.length)];
                 this.life = 0;
-                this.maxLife = Math.random() * 50 + 40;
+                // Delší životnost částic, aby mohly doletět dál do široka
+                this.maxLife = isExplosion
+                    ? (Math.random() * 60 + 70) // 70 až 130 snímků
+                    : (Math.random() * 40 + 40); // 40 až 80 snímků
                 
                 this.rotation = Math.random() * Math.PI * 2;
-                this.rotationSpeed = (Math.random() - 0.5) * 0.2;
-                this.width = Math.random() * 7 + 4;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.25;
+                this.width = Math.random() * 8 + 4;
                 this.height = Math.random() * 5 + 2;
             }
 
@@ -267,9 +280,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.life++;
                 this.x += this.vx;
                 this.y += this.vy;
-                this.vx *= 0.95;
-                this.vy *= 0.95;
-                this.vy += 0.12; // gravity
+                // Velmi nízké tření horizontálně pro maximální dolet do široka
+                this.vx *= 0.982;
+                this.vy *= 0.975;
+                this.vy += 0.09; // Jemná gravitace pro lehký a elegantní pád
                 this.rotation += this.rotationSpeed;
             }
 
@@ -297,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function triggerExplosion() {
             const centerX = canvas.width / 2;
             const centerY = canvas.height / 2;
-            const count = Math.floor(Math.random() * 20) + 60; // 60-80 particles
+            const count = Math.floor(Math.random() * 30) + 80; // 80-110 particles
             for (let i = 0; i < count; i++) {
                 particles.push(new Particle(centerX, centerY, true));
             }
