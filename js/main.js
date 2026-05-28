@@ -202,12 +202,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Sparks & Confetti explosion on the last timeline item (Dnes) - desktop only (width >= 768px)
+    // Sparks & Confetti explosion on the last timeline item (Dnes)
     const todayCard = document.querySelector('.timeline-content.highlight');
-    if (todayCard && window.innerWidth >= 768) {
+    if (todayCard) {
         const canvas = document.createElement('canvas');
         canvas.style.position = 'absolute';
-        const padding = 240; 
+        const padding = 200; 
         canvas.style.top = `-${padding}px`;
         canvas.style.left = `-${padding}px`;
         canvas.style.width = `calc(100% + ${padding * 2}px)`;
@@ -244,45 +244,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.y = y;
                 this.type = Math.random() > 0.4 ? 'spark' : 'confetti';
                 
-                // Usměrnění úhlu více do stran (vlevo/vpravo) pro elegantní rozptyl
-                let angle;
-                if (Math.random() > 0.5) {
-                    // Do pravé strany: -50° až +50°
-                    angle = (Math.random() - 0.5) * (Math.PI * 100 / 180);
-                } else {
-                    // Do levé strany: 130° až 230°
-                    angle = Math.PI + (Math.random() - 0.5) * (Math.PI * 100 / 180);
-                }
-                
+                const angle = Math.random() * Math.PI * 2;
                 const speed = isExplosion 
-                    ? (Math.random() * 5 + 2) // Vyvážená rychlost exploze
-                    : (Math.random() * 2.5 + 1);
+                    ? (Math.random() * 6 + 2) 
+                    : (Math.random() * 3 + 1);
                     
-                // Vyladěné horizontální roztažení a mírný počáteční impulz nahoru
-                this.vx = Math.cos(angle) * speed * 1.65;
-                this.vy = Math.sin(angle) * speed * 0.7 - (isExplosion ? 1.8 : 0.6);
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed - (isExplosion ? 2 : 1);
                 
-                this.size = Math.random() * 2.5 + 1.2;
+                this.size = Math.random() * 3 + 1.5;
                 this.color = colors[Math.floor(Math.random() * colors.length)];
                 this.life = 0;
-                this.maxLife = isExplosion
-                    ? (Math.random() * 50 + 40) // Vyvážená životnost částic
-                    : (Math.random() * 30 + 30);
+                this.maxLife = Math.random() * 50 + 40;
                 
                 this.rotation = Math.random() * Math.PI * 2;
                 this.rotationSpeed = (Math.random() - 0.5) * 0.2;
-                this.width = Math.random() * 6 + 3;
-                this.height = Math.random() * 4 + 1.5;
+                this.width = Math.random() * 7 + 4;
+                this.height = Math.random() * 5 + 2;
             }
 
             update() {
                 this.life++;
                 this.x += this.vx;
                 this.y += this.vy;
-                // Vyvážené tření pro plynulé zpomalování a elegantní pád
-                this.vx *= 0.976;
-                this.vy *= 0.968;
-                this.vy += 0.11; // Gravitace
+                this.vx *= 0.95;
+                this.vy *= 0.95;
+                this.vy += 0.12; // gravity
                 this.rotation += this.rotationSpeed;
             }
 
@@ -293,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.fillStyle = this.color;
                 
                 if (this.type === 'spark') {
-                    ctx.shadowBlur = 5;
+                    ctx.shadowBlur = 6;
                     ctx.shadowColor = this.color;
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -310,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function triggerExplosion() {
             const centerX = canvas.width / 2;
             const centerY = canvas.height / 2;
-            const count = Math.floor(Math.random() * 15) + 35; // 35-50 particles
+            const count = Math.floor(Math.random() * 20) + 60; // 60-80 particles
             for (let i = 0; i < count; i++) {
                 particles.push(new Particle(centerX, centerY, true));
             }
@@ -318,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function spawnContinuous() {
-            if (isHovered && Math.random() < 0.2) {
+            if (isHovered && Math.random() < 0.25) {
                 const centerX = canvas.width / 2;
                 const centerY = canvas.height / 2;
                 particles.push(new Particle(centerX, centerY, false));
@@ -358,5 +345,9 @@ document.addEventListener('DOMContentLoaded', () => {
         todayCard.addEventListener('mouseleave', () => {
             isHovered = false;
         });
+
+        todayCard.addEventListener('touchstart', () => {
+            triggerExplosion();
+        }, { passive: true });
     }
 });
