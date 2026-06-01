@@ -7,6 +7,12 @@
       "has": [{ "type": "host", "value": "kovopardubice.vercel.app" }],
       "destination": "https://kovopardubice.cz/$1",
       "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.kovopardubice.cz" }],
+      "destination": "https://kovopardubice.cz/$1",
+      "permanent": true
     }
   ]
 }
