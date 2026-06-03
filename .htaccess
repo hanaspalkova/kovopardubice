@@ -1,0 +1,24 @@
+Options -Indexes
+
+# Chybová stránka 404
+ErrorDocument 404 /404.html
+
+# Mod_rewrite
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # www → non-www (301)
+    RewriteCond %{HTTP_HOST} ^www\.kovopardubice\.cz [NC]
+    RewriteRule ^ https://kovopardubice.cz%{REQUEST_URI} [R=301,L]
+
+    # Přesměrování *.html → čistá URL (301)
+    RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
+    RewriteRule ^ /%1 [R=301,L]
+
+    # Interní obsluha čistých URL → příslušný .html soubor
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.html -f
+    RewriteRule ^(.+)$ $1.html [L]
+</IfModule>
