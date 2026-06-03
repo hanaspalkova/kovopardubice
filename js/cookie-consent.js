@@ -1,16 +1,14 @@
 (function () {
     const STORAGE_KEY = 'cookie_consent';
+    const STORAGE_FUNCTIONAL = 'cookie_functional';
+    const STORAGE_ANALYTICS  = 'cookie_analytics';
 
-    /* ---------- GA helpers ---------- */
+    /* ---------- GA ---------- */
     function grantAnalytics() {
-        if (typeof gtag === 'function') {
-            gtag('consent', 'update', { analytics_storage: 'granted' });
-        }
+        if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'granted' });
     }
     function denyAnalytics() {
-        if (typeof gtag === 'function') {
-            gtag('consent', 'update', { analytics_storage: 'denied' });
-        }
+        if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'denied' });
     }
 
     /* ---------- Google Maps ---------- */
@@ -35,6 +33,8 @@
 
     function acceptAll() {
         localStorage.setItem(STORAGE_KEY, 'all');
+        localStorage.setItem(STORAGE_FUNCTIONAL, '1');
+        localStorage.setItem(STORAGE_ANALYTICS, '1');
         hideBanner();
         loadGoogleMaps();
         grantAnalytics();
@@ -42,6 +42,8 @@
 
     function acceptNecessary() {
         localStorage.setItem(STORAGE_KEY, 'necessary');
+        localStorage.setItem(STORAGE_FUNCTIONAL, '0');
+        localStorage.setItem(STORAGE_ANALYTICS, '0');
         hideBanner();
         denyAnalytics();
     }
@@ -50,10 +52,10 @@
     function openModal() {
         const modal = document.getElementById('cookie-modal');
         if (!modal) return;
-        // předvyplnit toggle podle uloženého stavu
-        const saved = localStorage.getItem(STORAGE_KEY);
-        const toggle = document.getElementById('cookie-toggle-analytics');
-        if (toggle) toggle.checked = (saved === 'all' || saved === 'custom-analytics');
+        const toggleF = document.getElementById('cookie-toggle-functional');
+        const toggleA = document.getElementById('cookie-toggle-analytics');
+        if (toggleF) toggleF.checked = localStorage.getItem(STORAGE_FUNCTIONAL) === '1';
+        if (toggleA) toggleA.checked = localStorage.getItem(STORAGE_ANALYTICS) === '1';
         modal.classList.add('visible');
         document.body.style.overflow = 'hidden';
     }
@@ -66,35 +68,34 @@
     }
 
     function savePreferences() {
-        const toggle = document.getElementById('cookie-toggle-analytics');
-        const analytics = toggle && toggle.checked;
-        if (analytics) {
-            localStorage.setItem(STORAGE_KEY, 'custom-analytics');
-            loadGoogleMaps();
-            grantAnalytics();
-        } else {
-            localStorage.setItem(STORAGE_KEY, 'necessary');
-            denyAnalytics();
-        }
+        const functional = document.getElementById('cookie-toggle-functional')?.checked;
+        const analytics  = document.getElementById('cookie-toggle-analytics')?.checked;
+
+        localStorage.setItem(STORAGE_KEY, 'custom');
+        localStorage.setItem(STORAGE_FUNCTIONAL, functional ? '1' : '0');
+        localStorage.setItem(STORAGE_ANALYTICS,  analytics  ? '1' : '0');
+
+        if (functional) loadGoogleMaps();
+        if (analytics)  grantAnalytics(); else denyAnalytics();
+
         closeModal();
         hideBanner();
     }
 
     /* ---------- Init ---------- */
     function init() {
-        const consent = localStorage.getItem(STORAGE_KEY);
+        const functional = localStorage.getItem(STORAGE_FUNCTIONAL) === '1';
+        const analytics  = localStorage.getItem(STORAGE_ANALYTICS)  === '1';
+        const consent    = localStorage.getItem(STORAGE_KEY);
 
-        if (consent === 'all' || consent === 'custom-analytics') {
-            loadGoogleMaps();
-            grantAnalytics();
-        }
+        if (functional) loadGoogleMaps();
+        if (analytics)  grantAnalytics();
 
-        // banner
+        /* banner */
         const banner = document.getElementById('cookie-banner');
         if (banner) {
-            if (!consent) {
-                requestAnimationFrame(() => banner.classList.add('visible'));
-            }
+            if (!consent) requestAnimationFrame(() => banner.classList.add('visible'));
+
             document.getElementById('cookie-accept-all')
                 ?.addEventListener('click', acceptAll);
             document.getElementById('cookie-accept-necessary')
@@ -106,7 +107,7 @@
                 });
         }
 
-        // modal
+        /* modal */
         document.getElementById('cookie-save-preferences')
             ?.addEventListener('click', savePreferences);
         document.getElementById('cookie-modal-close')
@@ -114,9 +115,9 @@
         document.getElementById('cookie-modal-overlay')
             ?.addEventListener('click', closeModal);
 
-        // mapa
-        const mapBtn = document.getElementById('map-consent-btn');
-        if (mapBtn) mapBtn.addEventListener('click', acceptAll);
+        /* mapa — tlačítko přímo v sekci mapy */
+        document.getElementById('map-consent-btn')
+            ?.addEventListener('click', acceptAll);
     }
 
     if (document.readyState === 'loading') {
