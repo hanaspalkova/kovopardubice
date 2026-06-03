@@ -349,6 +349,36 @@
     <!-- JS -->
     <script src="js/main.js"></script>
     <script src="js/cookie-consent.js"></script>
+    <div id="cookie-modal" class="cookie-modal" role="dialog" aria-modal="true" aria-label="Nastavení cookies">
+        <div id="cookie-modal-overlay" class="cookie-modal__overlay"></div>
+        <div class="cookie-modal__box">
+            <button id="cookie-modal-close" class="cookie-modal__close" aria-label="Zavřít">&times;</button>
+            <h2 class="cookie-modal__title">Nastavení cookies</h2>
+            <div class="cookie-modal__item">
+                <div class="cookie-modal__info">
+                    <strong>Nezbytné cookies</strong>
+                    <p>Zajišťují základní funkce webu. Nelze vypnout.</p>
+                </div>
+                <label class="cookie-toggle cookie-toggle--disabled">
+                    <input type="checkbox" checked disabled>
+                    <span class="cookie-toggle__slider"></span>
+                </label>
+            </div>
+            <div class="cookie-modal__item">
+                <div class="cookie-modal__info">
+                    <strong>Analytické cookies</strong>
+                    <p>Google Analytics – pomáhají nám sledovat návštěvnost a zlepšovat web.</p>
+                </div>
+                <label class="cookie-toggle">
+                    <input type="checkbox" id="cookie-toggle-analytics">
+                    <span class="cookie-toggle__slider"></span>
+                </label>
+            </div>
+            <div class="cookie-modal__actions">
+                <button id="cookie-save-preferences" class="cookie-banner__btn cookie-banner__btn--primary">Uložit nastavení</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
