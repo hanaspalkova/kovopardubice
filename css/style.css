@@ -723,6 +723,15 @@ body.menu-open .logo-link {
     .footer-grid {
         grid-template-columns: 1fr 1fr 1fr;
     }
+
+    .footer-nav {
+        text-align: right;
+    }
+
+    .footer-nav .footer-title::after {
+        left: auto;
+        right: 0;
+    }
 }
 
 .footer-title {
