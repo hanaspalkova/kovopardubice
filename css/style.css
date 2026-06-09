@@ -726,16 +726,7 @@ body.menu-open .logo-link {
     }
 
     .footer-nav {
-        text-align: right;
-    }
-
-    .footer-nav .footer-title::after {
-        left: auto;
-        right: 0;
-    }
-
-    .footer-nav .footer-list li {
-        justify-content: flex-end;
+        justify-self: end;
     }
 }
 
