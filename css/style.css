@@ -733,6 +733,10 @@ body.menu-open .logo-link {
         left: auto;
         right: 0;
     }
+
+    .footer-nav .footer-list li {
+        justify-content: flex-end;
+    }
 }
 
 .footer-title {
