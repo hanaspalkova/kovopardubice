@@ -721,16 +721,9 @@ body.menu-open .logo-link {
 
 @media (min-width: 768px) {
     .footer-grid {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-
-    .footer-nav {
-        text-align: right;
-    }
-
-    .footer-nav .footer-title::after {
-        left: auto;
-        right: 0;
+        grid-template-columns: repeat(3, minmax(200px, 280px));
+        justify-content: center;
+        gap: 4rem;
     }
 }
 
