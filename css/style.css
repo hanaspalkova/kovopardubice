@@ -723,11 +723,9 @@ body.menu-open .logo-link {
     .footer-grid {
         grid-template-columns: 1fr 1fr 1fr;
         gap: 4rem;
-    }
-
-    .footer .container {
-        padding-left: 3rem;
-        padding-right: 3rem;
+        max-width: 960px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
