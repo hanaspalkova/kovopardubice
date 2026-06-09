@@ -724,6 +724,11 @@ body.menu-open .logo-link {
         grid-template-columns: 1fr 1fr 1fr;
         gap: 4rem;
     }
+
+    .footer .container {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
 }
 
 .footer-title {
