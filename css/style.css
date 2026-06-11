@@ -722,17 +722,6 @@ body.menu-open .logo-link {
 @media (min-width: 768px) {
     .footer-grid {
         grid-template-columns: 1fr 1fr 1fr;
-        gap: 4rem;
-    }
-
-    .footer-contact {
-        width: fit-content;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .footer-nav {
-        justify-self: end;
     }
 }
 
