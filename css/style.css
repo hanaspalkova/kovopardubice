@@ -722,6 +722,7 @@ body.menu-open .logo-link {
 @media (min-width: 768px) {
     .footer-grid {
         grid-template-columns: 1fr 1fr 1fr;
+        padding-left: 3rem;
     }
 }
 
