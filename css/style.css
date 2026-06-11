@@ -725,6 +725,10 @@ body.menu-open .logo-link {
         gap: 4rem;
     }
 
+    .footer-contact {
+        justify-self: center;
+    }
+
     .footer-nav {
         justify-self: end;
     }
