@@ -728,7 +728,12 @@ body.menu-open .logo-link {
     .footer-contact {
         display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
+    }
+
+    .footer-contact .footer-list {
+        align-items: flex-start;
     }
 
     .footer-nav {
