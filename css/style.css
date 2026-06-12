@@ -466,8 +466,14 @@ body.menu-open .logo-link {
 }
 
 .hero-content {
-    max-width: 680px;
     z-index: 1;
+}
+
+.hero-content .hero-subtitle,
+.hero-content .hero-title,
+.hero-content .hero-description,
+.hero-content .hero-buttons {
+    max-width: 680px;
 }
 
 .hero-subtitle {
