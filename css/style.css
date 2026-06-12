@@ -1353,15 +1353,14 @@ body.menu-open .logo-link {
 }
 
 .faq-icon {
-    color: var(--color-muted-light);
-    font-size: 0.875rem;
-    transition: transform 0.3s ease, color 0.3s ease;
+    color: var(--color-orange);
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
     flex-shrink: 0;
 }
 
 .faq-item.active .faq-icon {
     transform: rotate(180deg);
-    color: var(--color-orange);
 }
 
 .faq-answer {
