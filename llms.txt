@@ -1,4 +1,4 @@
-# Kovovýroba Jiří Vyskočil
+﻿# Kovovýroba Jiří Vyskočil
 
 ## O webu
 Web kovovýrobního řemeslníka Jiřího Vyskočila se sídlem v Semtíně u Pardubic.
@@ -6,7 +6,7 @@ Specializace: výroba bran, plotů, ocelových konstrukcí, schodišť, zábradl
 
 ## Kontakt
 - Telefon: +420 773 185 886
-- E-mail: kovopardubice@gmail.com
+- E-mail: info@kovopardubice.cz
 - Provozovna: Semtín, Pardubice
 - IČO: 73667846
 
@@ -29,3 +29,4 @@ prodej hutního materiálu a betonářské výztuže.
 
 ## Pokrytí
 Pardubický kraj a okolí. Větší projekty individuálně.
+
