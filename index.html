@@ -139,6 +139,7 @@
         <div class="hero-bg">
             <div class="hero-overlay"></div>
         </div>
+        <canvas class="hero-sparks" id="heroSparks"></canvas>
         <div class="container hero-content">
             <h1 class="hero-subtitle reveal-up"><span class="line"></span> KOVOVÝROBA PARDUBICE – JIŘÍ VYSKOČIL</h1>
             <h2 class="hero-title reveal-up" style="transition-delay: 0.1s;">SPOLEHLIVÁ PRÁCE<br>S <span
@@ -349,6 +350,93 @@
     <!-- JS -->
     <script src="js/main.js"></script>
     <script src="js/cookie-consent.js?v=3"></script>
+    <script>
+    (function() {
+        const canvas = document.getElementById('heroSparks');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const sparks = [];
+        const COLORS = ['#E8720C', '#FF9A3C', '#FFD580', '#fff'];
+
+        function resize() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        }
+
+        function randomBetween(a, b) { return a + Math.random() * (b - a); }
+
+        function createSpark() {
+            return {
+                x: randomBetween(0, canvas.width),
+                y: randomBetween(0, canvas.height),
+                size: randomBetween(1.5, 4),
+                opacity: 0,
+                maxOpacity: randomBetween(0.5, 1),
+                phase: 'in',
+                speed: randomBetween(0.008, 0.022),
+                color: COLORS[Math.floor(Math.random() * COLORS.length)],
+                rotation: randomBetween(0, Math.PI * 2),
+                rotSpeed: randomBetween(-0.04, 0.04),
+            };
+        }
+
+        for (let i = 0; i < 55; i++) {
+            const s = createSpark();
+            s.opacity = randomBetween(0, s.maxOpacity);
+            s.phase = Math.random() < 0.5 ? 'in' : 'out';
+            sparks.push(s);
+        }
+
+        function drawStar(x, y, size, opacity, color, rotation) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(rotation);
+            ctx.globalAlpha = opacity;
+            ctx.fillStyle = color;
+            ctx.shadowColor = color;
+            ctx.shadowBlur = size * 3;
+            ctx.beginPath();
+            for (let i = 0; i < 4; i++) {
+                const angle = (i / 4) * Math.PI * 2;
+                const outerX = Math.cos(angle) * size;
+                const outerY = Math.sin(angle) * size;
+                const innerAngle = angle + Math.PI / 4;
+                const innerX = Math.cos(innerAngle) * size * 0.35;
+                const innerY = Math.sin(innerAngle) * size * 0.35;
+                if (i === 0) ctx.moveTo(outerX, outerY);
+                else ctx.lineTo(outerX, outerY);
+                ctx.lineTo(innerX, innerY);
+            }
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < sparks.length; i++) {
+                const s = sparks[i];
+                s.rotation += s.rotSpeed;
+                if (s.phase === 'in') {
+                    s.opacity += s.speed;
+                    if (s.opacity >= s.maxOpacity) { s.opacity = s.maxOpacity; s.phase = 'out'; }
+                } else {
+                    s.opacity -= s.speed;
+                    if (s.opacity <= 0) {
+                        sparks[i] = createSpark();
+                        continue;
+                    }
+                }
+                drawStar(s.x, s.y, s.size, s.opacity, s.color, s.rotation);
+            }
+            requestAnimationFrame(animate);
+        }
+
+        resize();
+        window.addEventListener('resize', resize);
+        animate();
+    })();
+    </script>
     <div id="cookie-modal" class="cookie-modal" role="dialog" aria-modal="true" aria-label="Nastavení cookies">
         <div id="cookie-modal-overlay" class="cookie-modal__overlay"></div>
         <div class="cookie-modal__box">
