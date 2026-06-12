@@ -468,8 +468,6 @@ body.menu-open .logo-link {
 .hero-content {
     max-width: 680px;
     z-index: 1;
-    margin-left: 5%;
-    margin-right: auto;
 }
 
 .hero-subtitle {
