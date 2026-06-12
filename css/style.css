@@ -466,9 +466,11 @@ body.menu-open .logo-link {
 }
 
 .hero-content {
-    max-width: 800px;
+    max-width: 600px;
     z-index: 1;
     margin-right: auto;
+    margin-left: -3rem;
+    padding-left: 0;
 }
 
 .hero-subtitle {
