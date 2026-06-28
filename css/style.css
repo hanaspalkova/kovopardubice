@@ -240,9 +240,15 @@ section {
 }
 
 .nav-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+    display: none;
+}
+
+@media (min-width: 992px) {
+    .nav-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
 }
 
 .logo-link {
