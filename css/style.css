@@ -321,6 +321,7 @@ section {
     border: none;
     cursor: pointer;
     z-index: 1001;
+    margin-left: auto;
 }
 
 .hamburger-line {
